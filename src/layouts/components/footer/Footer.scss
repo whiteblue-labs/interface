@@ -1,0 +1,98 @@
+.app-footer{
+    width: 100%;
+    background-color: rgba(255,255,255,.04);
+    margin-top: 40px;
+    height: var(--footer-height);
+    p{
+        color: #DDDDDD;
+        font-size: 1.4rem;
+    }
+    
+    &--container {
+        margin: 0 var(--app-margin) 0 var(--app-margin);
+        padding: 20px 0 0px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .app-footer--intro{
+            flex: 0.4;
+        }
+
+        .app-footer--content {
+            flex: 0.5;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+
+            .app-footer--sitemap {
+                flex: 0.28;
+                display: flex;
+                flex-direction: column;
+                
+                &--title {
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    margin-bottom: 0.3rem;
+                }
+                
+                &--link {
+                    color: #DDDDDD;
+                    font-size: 1.4rem;
+                }
+            }
+
+            .app-footer--company {
+                flex: 0.28;
+                display: flex;
+                flex-direction: column;
+                &--title {
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    margin-bottom: 0.3rem;
+                }
+            }
+
+            .app-footer--language {
+                flex: 0.28;
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                &--title {
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    margin-bottom: 0.3rem;
+                    cursor: text;
+                }
+            }
+        }
+    }
+
+    &--logovbc {
+        img {
+            height: 84px;
+        }
+    }
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .app-footer {
+        .app-footer--content {
+            display: none;
+        }
+        .app-footer--container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer-company-intro {
+            width: 80vw;
+            text-align: center;
+        }
+        .app-footer--logovbc img{
+            padding-left: 40px;
+        }
+    }
+}

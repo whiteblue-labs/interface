@@ -1,0 +1,202 @@
+.css-flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.app-header--option{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  div {
+    margin: 0 0 0 3rem;
+    cursor: pointer;
+    &:hover {
+      border-bottom: 1px solid var(--color-secondary);
+      margin-bottom: 2px;
+    }
+    
+    a {
+      color: var(--color-text-white);
+      font-size: 1.4rem;
+      font-weight: 400;
+    }
+
+    .tabFocus{
+      color: var(--color-secondary);
+      font-weight: 700;
+    }
+  }
+} 
+.app-header--pane{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  margin: 0 var(--app-margin) 0 var(--app-margin);
+}
+.app-logo{
+  height: 32px;
+  margin: 10px;
+  cursor: pointer ;
+}
+.app-header{
+  background-color: rgba(255,255,255,.04);
+  height: var(--header-height);
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  &--shadow{
+    background-color: #303e4a;
+  }
+}
+
+.btn-connect_wallet {
+    background: #15BFFD;
+    margin-left: 24px;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    height: 32px;
+}
+.sidebar-mobile {
+ display: none;   
+}
+.header-popover--container {
+  // width: 200px;
+  height: 32px;
+  background-color: #C2EDFC;
+  margin-left: 24px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .btn-connect_wallet {
+    margin-left: 0;
+  }
+
+  .network {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: default;
+    p {
+      color: #666;
+      font-size: 1.4rem;
+      line-height: 1.4rem;
+      font-weight: 600;
+      margin: 4px;
+    }
+    .network-icon{
+      font-size:1.6rem;
+    }
+  }
+
+  
+}
+
+.header-popover_user{
+  .container-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 80px 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-hover);
+    }
+  }
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-bottom: 4px;
+  }
+
+  .popover-icon{
+    font-size: 1.4rem;
+  }
+
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .app-header--option {
+    display: none;
+  }
+  .app-header--pane {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .btn-connect_wallet {
+    background: #15BFFD;
+    margin: 0;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    height: 32px;
+    width: 96px;
+    padding: 0px ;
+  }
+
+  .btn-connect_wallet {
+    margin-left: 0;
+  }
+
+  .header-popover--container {
+    background-color: #C2EDFC;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+    .btn-connect_wallet {
+      margin-left: 0;
+    }
+
+  .network {
+    padding: 0px;
+    p {
+      color: #666;
+      font-size: 1.2rem;
+      line-height: 1rem;
+      margin: 0px;
+    }
+    .network-icon{
+      font-size: 1.2rem;
+    }
+    .network-name{
+      font-size: 1.2rem !important;
+      width: 50px;
+    }
+  }
+  .app-logo{
+    height: 25px;
+    margin-right: 10px;
+  }
+  .sidebar-mobile {
+    display: block;
+  }
+
+  .sidebar-items {
+    font-size: 1.6rem;
+    padding: 10px 0px;
+    font-weight: 700;
+  }
+
+  .gotoTop{
+    display: none;
+  }
+}

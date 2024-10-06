@@ -1,0 +1,303 @@
+
+.app-create {
+    // height: 70%;
+    width: 840px;
+    background-color: white;
+    margin: 10% auto 20% auto;
+    padding: 40px;
+    border-radius: 16px;
+    .title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: rgba($color: #000000, $alpha: 0.8);
+
+        &--desc {
+            font-size: 1.6rem;
+            color: rgba($color: #000000, $alpha: 0.6);
+            margin-bottom: 16px;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        
+        .form {
+            flex: 0.6;
+            .form-input {
+                padding: 16px;
+                border-radius: 5px;
+                background-color: #F9FAFB;
+                border: 0.5px solid #E5E7EB;
+                height: 120px;
+                &--header{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    &--token {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        cursor: pointer;
+                        img {
+                            width: 2.5rem;
+                            height: 2.5rem;
+                            margin-right: 6px;   
+                        }
+                        
+                        p {
+                            font-size: 1.6rem;
+                            font-weight: 600;
+                            color: rgba($color: #000000, $alpha: 0.8);
+                            margin-right: 20px;
+                        }
+                        
+                    }
+                }
+
+                &--content {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+
+                    &--input {
+                        width: 160px;
+                        padding: 4px 0px;
+                        .ant-input-number-input{
+                            font-weight: 600;
+                            color: #333;
+                            font-size: 1.7rem;
+                            font-family: 'Inter', sans-serif;
+                        }
+                    }
+
+                    &--amount {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        font-weight: 400;
+                        font-size: 1.4rem;
+
+                        Button {
+                            font-size: 1.2rem;
+                            height: 24px;
+                            border-radius: 0px;
+                            padding: 0px 5px;
+                            color: var(--color-secondary);
+                            font-weight: 600;
+                            margin-right: 6px;
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        .divider {
+            height: 320px;
+        }
+
+        .info {
+            flex: 0.35;
+            .info-title {
+                font-size: 1.6rem;
+                font-weight: 500;
+                color: black;
+                margin-bottom: 10px;
+            }
+            
+            .average {
+                .pair{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding-right: 20px;
+                    .average {
+                        font-size: 2rem;
+                        font-weight: 700;
+                        color: rgba($color: red, $alpha: .5);
+                    }
+                }
+            }
+
+            .locktime {
+                margin-top: 32px;
+                .input-time{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-end;
+                    margin-left: 4rem;
+                    p {
+                        margin-left: 10px;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .btn-create-order {
+        height: 50px;
+        width: 200px;
+
+        margin-top: 40px;
+        margin-left: calc((100% - 200px) / 2);
+
+        font-size: 1.8rem;
+        color: var(--color-text-white);
+        font-weight: 600;
+    }
+    .icon-container {
+        border-radius: 20px;
+        border: 2px solid black;
+
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        margin: 20px auto 20px auto;
+        .icon {
+            color: black;
+            font-size: 2rem;
+            rotate: 90deg;
+        }
+    }
+
+}
+
+
+@media only screen and (max-width: 600px) {
+
+
+    .app-create {
+        // height: 70%;
+        width: 95%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        .title {
+            font-size: 2rem;
+            line-height: 2rem;
+            &--desc {
+                font-size: 1.4rem;
+                margin-bottom: 16px;
+            }
+        }
+        .type-btn {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            
+            Button {
+                margin: 4px;
+            }
+        }
+        .content {
+            flex-direction: column;
+            .form {
+                width: 95%;
+                .form-input {
+                    padding: 10px;
+                    height: 100px;
+                    &--header{
+                        margin-bottom: 5px;
+                        &--token {
+                            img {
+                                width: 2rem;
+                                height: 2rem;
+                                margin-right: 6px;   
+                            }
+                            p {
+                                font-size: 1.4rem;
+                            }
+                        }
+                    }
+    
+                    &--content {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        &--input {
+                            width: 120px;
+                            padding: 2px 0px;
+                            .ant-input-number-input{
+                                font-size: 1.4rem;
+                            }
+                        }
+                        &--amount {
+                            font-size: 1.2rem;
+                            Button {
+                                margin-left: 6px;
+                            }
+                        }
+                    }
+                }
+    
+    
+            }
+    
+            .divider {
+                display: none;
+            }
+    
+            .info {
+                flex: 0.35;
+                .info-title {
+                    font-size: 1.6rem;
+                    font-weight: 500;
+                    color: black;
+                    margin-bottom: 10px;
+                }
+                
+                .average {
+                    .pair{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        padding-right: 0px;
+                        .average {
+                            font-size: 1.6rem;
+                        }
+                    }
+                }
+            }
+        }
+    
+        .btn-create-order {
+            height: 40px;
+            width: 150px;
+    
+            margin-top: 20px;
+            margin-left: calc((100% - 150px) / 2);
+    
+            font-size: 1.6rem;
+            color: var(--color-text-white);
+            font-weight: 600;
+        }
+        .icon-container {
+            border-radius: 20px;
+            border: 2px solid black;
+    
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+            margin: 10px auto 10px auto;
+            .icon {
+                color: black;
+                font-size: 1.2rem;
+                rotate: 90deg;
+            }
+        }
+    
+    }
+
+}

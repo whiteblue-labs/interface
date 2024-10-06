@@ -1,0 +1,283 @@
+$padding-v-intro: 40px;
+
+.app-home{
+    // margin: 0 var(--app-margin) 0 var(--app-margin);
+    &--intro1 {
+        padding: 0px 0 100px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        height: 800px;
+        flex: 1;
+        .intro-left{
+            flex:0.6;
+            .title {
+                font-size: 3rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: var(--color-text-white)
+            }   
+            .desc {
+                font-size: 1.8rem;
+                font-weight: 400;
+                color: var(--color-text-white);
+                margin-bottom: 24px;
+            }
+            .btn-1 {
+                background-color: transparent;
+                border-color: var(--color-secondary);
+                color: #DDDDDD;
+                font-weight: 500;
+                font-size: 1.6rem;
+                margin-right: 20px;
+            }
+            .btn-2 {
+                background-color: var(--color-secondary);
+                color: #DDDDDD;
+                font-weight: 500;
+                font-size: 1.6rem;
+            }
+        }
+
+        .intro-right {
+            flex: 0.4;
+            position: relative;
+            img {
+                position: absolute;                
+                height: 500px;
+                bottom: 50px;
+                right: -8.8vw;
+            }
+            .lottie-gift {
+                height: 20rem;
+                position: absolute;
+                right: 180px;
+                top: -340px
+            }
+        }
+    }
+
+    &--intro2{
+        padding:  0 0 200px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        height: 800px;
+        .intro-right{
+            flex:0.6;
+            .title {
+                font-size: 3rem;
+                color: var(--color-text-white);
+                text-align: right;
+            }   
+            .desc {
+                font-size: 1.8rem;
+                font-weight: 400;
+                color: var(--color-text-white);
+                margin-bottom: 24px;
+                text-align: right;
+
+            }
+            .btn-1 {
+                background-color: transparent;
+                border-color: var(--color-secondary);
+                color: #DDDDDD;
+                font-weight: 500;
+                font-size: 1.6rem;
+                margin-right: 20px;
+            }
+            .btn-2 {
+                background-color: var(--color-secondary);
+                color: #DDDDDD;
+                font-weight: 500;
+                font-size: 1.6rem;
+            }
+            .btn-group {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+        }
+        .intro-left{
+            flex: 0.4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &--whychoose{
+        padding: 0 50px 0 50px;
+        &--mobile {
+            display: none;
+        }
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-text-white);
+            text-align: center;
+            margin-bottom: 80px;
+        }   
+
+        &--list-1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            width: 100%;
+        }
+
+        &--list-2 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    &--package {
+        padding: 100px 200px 200px 200px;
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--color-text-white);
+            margin-bottom: 80px;
+        }
+    
+        .list-packages{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+    }
+    &--logo_tail{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 200px 0 100px 0;
+        
+        img {
+            width: 36%;
+        }
+    }
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .app-home{
+        &--intro1 {
+            display: block;
+            margin-top: 100px;
+            padding-bottom: 20px;
+            height: auto;
+            .intro-left{
+                padding-right: 10%;
+                .title {
+                    font-size: 1.8rem;
+                }   
+                .desc {
+                    font-size: 1.4rem;
+                    font-weight: 400;
+                    color: var(--color-text-white);
+                    margin-bottom: 24px;
+                }
+                .btn-1 {
+                    font-size: 1.4rem;
+                }
+                .btn-2 {
+                    font-size: 1.4rem;
+                }
+            }
+    
+            .intro-right {
+                img {
+                    height: 300px;
+                    z-index: -1;
+                    right: 0;
+                    top: -400px;
+                }
+                .lottie-gift {
+                    display: none;
+                }
+            }
+        }
+        
+        &--intro2{
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 0px;
+            .intro-right{
+                padding-bottom: 0px;
+                width: 90%;
+                .title {
+                    font-size: 1.8rem;
+                }   
+                .desc {
+                    font-size: 1.4rem;
+                    font-weight: 400;
+                    color: var(--color-text-white);
+                    margin-bottom: 24px;
+                    text-align: right;
+                }
+            }
+            .intro-left{
+                img {
+                    height: 200px;
+                }
+            }
+        }
+    
+        &--whychoose{
+            padding: 0;
+            &--pc {
+                display: none;
+            }
+            &--mobile {
+                display: block;
+            }
+            .title {
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: var(--color-text-white);
+                text-align: center;
+                margin-bottom: 10px;
+            }   
+            &--list-1 {
+                // display: flex;
+                flex-direction: column;
+                // justify-content: space-between;
+                margin-bottom: 0px;
+                width: 100%;
+            }
+    
+            &--list-2 {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+    
+        &--package {
+            display: none;
+        }
+        &--logo_tail{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0 40px 0;
+            
+            img {
+                width: 60%;
+            }
+        }
+    }
+    
+}

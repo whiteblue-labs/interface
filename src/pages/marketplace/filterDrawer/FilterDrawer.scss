@@ -1,0 +1,90 @@
+.app-market-filter {
+  .header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &--tab {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      &--item {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: black;
+        min-width: 60px;
+        border-bottom: 3px solid #fafafa;
+        margin-right: 16px;
+        cursor: pointer;
+        &--show {
+          border-bottom: 3px solid var(--color-secondary);
+          padding-bottom: 2px;
+        }
+      }
+    }
+
+    &--option {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &--item {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--color-secondary);
+        cursor: pointer;
+      }
+
+      .close-icon {
+        margin-left: 30px;
+        color: black;
+        font-size: 2.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .divider {
+    border-color: rgba($color: #a3a3a3, $alpha: 0.6);
+    margin: 10px 0px;
+  }
+
+  .content-filter {
+    margin-top: 20px;
+    .item {
+      margin-bottom: 50px;
+      &--title {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: 16px;
+      }
+
+      &--token {
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        p {
+          color: black;
+          font-weight: 400;
+          margin: 6px 0;
+          font-size: 1.4rem;
+          min-width: 100px;
+        }
+
+        Button {
+          // background-color: var(--color-secox  ndary);
+        }
+      }
+
+      &--amount {
+        margin-top: -16px;
+        margin-left: 100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  }
+}

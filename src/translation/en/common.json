@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "home": "Introduction",
+    "market": "Marketplace",
+    "rewards": "Rewards",
+    "faucet": "Faucet",
+    "about": "About"
+  },
+  "footer": {
+    "sitemap": "Sitemap",
+    "company": {
+      "title": "Company",
+      "help": "Help & Support",
+      "policy": "Privacy Policy"
+    },
+    "lang": {
+      "title":"Language",
+      "vi": "Vietnamese",
+      "en": "English"
+    }    
+  },
+  "contact":{
+    "title": {
+      "address": "Address",
+      "timework": "Woking time",
+      "email": "Email",
+      "phone":"Phone"
+    },
+    "content": {
+      "address": "",
+      "timework": "",
+      "email": "",
+      "phone":""
+    }
+  },
+  "login": {
+    "register": "Sign up",
+    "login": "Sign in",
+    "haveAccount": "Already have account?",
+    "noAccount": "Don't have account?",
+    "username": "Username",
+    "name": "Username",
+    "email": "Email",
+    "pass": "Password",
+    "phone": "Phone",
+    "sendEmail": "Send email",
+    "enterOTP": "Enter OTP",
+    "forgotPass": "Forgot Pass"
+  },
+  "overview": {
+    "link": "Overall Dashboard"
+  },
+  "user": {
+    "link": "User Management",
+    "link1": "Officer Management",
+    "link2": "Owner Managerment"
+  },
+  "bays": {
+    "link": "Bays Management",
+    "list": "Bays list",
+    "overview": "Realtime figures",
+    "detail": "Bay detail"
+  },
+  "infringement":{
+    "link": "Infrigement Management"
+  },
+  "log":{
+    "link": "System log"
+  },
+  "show": "Show",
+  "row": "row",
+  "profile":{
+    "showPass": "Show password"
+  }
+}
+  
