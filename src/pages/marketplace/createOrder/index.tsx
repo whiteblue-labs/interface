@@ -15,6 +15,7 @@ import { ITask, ITaskState, createTask, doneOneTask, updateTask,} from "../../..
 import { getTokenContract, getSwapOneContract } from "../../../services/contract";
 import { getAddressOneChainContract } from "../../../utils/blockchain";
 import { requestChangeNetwork } from "../../../services/metamask";
+import {useAccount} from "wagmi";
 
 interface IFormData {
   from: {
@@ -48,10 +49,12 @@ export default function CreateOrder() {
   const [selectingTokenTo, setSelectingTokenTo] = useState<boolean>(false);
   const [isOneChain, setIsOneChain] = useState<boolean>(true);
   const [rate, setRate] = useState("0.000");
+  const {connector} = useAccount();
 
   const hdClickSwap = async () => {
     if (formData.from.token !== "" && formData.to.token.network !== userState.network) {
-      await requestChangeNetwork(formData.to.token.network)
+      const provider: any = await connector?.getProvider();
+      await requestChangeNetwork(formData.to.token.network, provider)
     }
     const newData: IFormData = {
       from: formData.to,
@@ -67,6 +70,7 @@ export default function CreateOrder() {
     });
     setRate(String(res?.data));
   };
+
   useEffect(() => {
     if(formData.from.token !== "" && formData.to.token !== ""){
       countExchangeRateForm();
@@ -484,7 +488,6 @@ export default function CreateOrder() {
           onClickSelect={(token: any) => {
             setFormData({ ...formData, from: {...formData.from, token: token.token, balance: token.balance} });
             hdClickSelectTokenFrom();
-
           }}
           tokenHidden={
             formData.to.token !== "" ? formData.to.token.deployedAddress : ""
@@ -501,11 +504,11 @@ export default function CreateOrder() {
             hdClickSelectTokenTo();
             setFormData({ ...formData, to: {...formData.to, token: token.token, balance: token.balance}});
           }}
-          isCheckNetwork={isOneChain ? true : false}
+          isCheckNetwork={isOneChain}
           tokenHidden={
             formData.from.token !== "" ? formData.from.token.deployedAddress : ""
           }
-          hiddenOtherNetwork={isOneChain ? true : false}
+          hiddenOtherNetwork={isOneChain}
           hiddenChain={(!isOneChain && formData.from.token !== '') ? formData.from.token.network : null}
         />
       )}

@@ -15,11 +15,12 @@ import jwt_decode from "jwt-decode";
 import {IUserState, saveInfo} from "./state/user/userSlice";
 import {fixStringBalance} from "./utils/string";
 import {getBalanceAccount} from "./utils/blockchain";
-import {saveWeb3} from "./state/app/appSlice";
+import {saveTokens, saveWeb3} from "./state/app/appSlice";
 import {signatureLogin} from "./layouts/components/header/helper/ConnectWallet";
 
 function App() {
-  const { connectors } = useConnect();
+  const { connectors   } = useConnect();
+  const { isConnected, connector } = useAccount()
   const { disconnect } = useDisconnect()
 
   const handleOnConnect = async (address?: string, connectorId?: string) => {
@@ -28,7 +29,6 @@ function App() {
     let storeData = store.getState();
     const toastify = toast.loading("Connecting to wallet ..., sign message to confirm!")
     const provider: any = await connector.getProvider();
-
     const myWeb3 = new Web3(provider);
     try {
       const signature = await signatureLogin(myWeb3, address);
@@ -63,13 +63,23 @@ function App() {
   }
 
 
+  const initWeb3 = async () => {
+    if (isConnected) {
+      const provider: any = await connector?.getProvider();
+      console.log(provider)
+      const myWeb3 = new Web3(provider);
+      store.dispatch(saveWeb3(myWeb3));
+    }
+  }
+
+
   useEffect(() => {
     store.dispatch(closeTaskModel())
     const myTasks = store.getState().taskState.taskList
     for (let i = 0; i < myTasks.length; i++) {
       if (![3, -1,-2].includes(myTasks[myTasks.length - i -1].status)) {
         store.dispatch(updateTask({
-          id: myTasks.length - i -1,  
+          id: myTasks.length - i -1,
           task: {...myTasks[myTasks.length - i -1], status: myTasks[myTasks.length - i -1].status === 1 ? -1 : -2 }}))
         store.dispatch(doneOneTask())
         }
@@ -77,7 +87,15 @@ function App() {
         break
       }
     }
+    appApi.getTokens().then(res => {
+      store.dispatch(saveTokens(res.data))
+      console.log(res.data)
+    })
   }, [])
+
+  useEffect(() => {
+    initWeb3()
+  }, [connector])
 
   return (
     <ConnectKitProvider

@@ -1,17 +1,15 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, Modal} from "antd";
+import {Button} from "antd";
 
 import "./Marketplace.scss";
 import appApi from "../../api/appAPI";
 import Order from "../../components/marketplace/Order";
-import {IUserState} from "../../state/user/userSlice";
 import SelectToken from "../../components/app/SelectToken";
 import TableOrder from "../../components/marketplace/TableOrder";
 import MarketPane from "../../components/marketplace/MarketPane";
 import {useAppDispatch, useAppSelector} from "../../state/hooks";
 import StatisticItem from "../../components/marketplace/StatisticItem";
-import {hdConnectWallet} from "../../layouts/components/header/helper/ConnectWallet";
 import FilterDrawer from "./filterDrawer/FilterDrawer";
 
 export interface IFilterData {
@@ -45,20 +43,6 @@ const titleStatistic = [
     note: "now"
   }
 ]
-export const showConfirmConnectWallet = (dispatch: any, appState: any, userState: IUserState, func?: () => void) => {
-  Modal.confirm({
-    title: 'You need to connect a wallet to create order!',
-    okText: 'Connect Wallet',
-    cancelText: 'Cancel ',
-    async onOk() {
-      await hdConnectWallet();
-      func && func()
-    },
-    onCancel() {
-      console.log('Cancel');
-    },
-  })
-};
 
 const Marketplace = () => {
   const [isListMode, setIsListMode] = useState(false);
@@ -142,18 +126,10 @@ const Marketplace = () => {
 
   const handleClickCreateOrder = () => {
     if (appState.isConnectedWallet) {
-      navigate('create')
-    } else {
-      showConfirmConnectWallet(dispatch, appState, userState, () => navigate('create'))
-    }
-  }
 
-  const handleClickMyOrder = () => {
-    if (appState.isConnectedWallet) {
-      navigate('my-order')
-    } else {
-      showConfirmConnectWallet(dispatch, appState, userState, () => navigate('my-order'))
+
     }
+
   }
 
   return (
@@ -179,13 +155,9 @@ const Marketplace = () => {
 
         <div className="market-btn-container">
           <Button
-            onClick={handleClickCreateOrder} type='primary' size={'large'}>
+            onClick={() => navigate('marketplace/create')} type='primary' size={'large'}>
             Create Order
           </Button>
-          <Button type='primary' size={'large'} onClick={handleClickMyOrder}>
-            My Order
-          </Button>
-
         </div>
       </div>
 

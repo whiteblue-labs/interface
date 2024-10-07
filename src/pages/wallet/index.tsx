@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../../state/hooks";
-import contractToken from "../../contract/Token/data.json";
+import React, {useState} from "react";
+import {useAppSelector} from "../../state/hooks";
 import QRCode from "react-qr-code";
 import "./Wallet.scss";
 
 import {History, Reward, Token} from "./helper";
-import { CopyOutlined } from "@ant-design/icons";
-import appApi from "../../api/appAPI";
-import { join } from "path";
-import { toast } from "react-toastify";
+import {CopyOutlined} from "@ant-design/icons";
+import {toast} from "react-toastify";
+
 interface IForm {
   token: string;
   amount: number;
@@ -75,12 +73,6 @@ const Wallet = () => {
               onClick={() => page !== WalletPage.HISTORY && setPage(WalletPage.HISTORY)}
             >
               <p>History</p>
-            </div>
-            <div className={`header-item${page === WalletPage.REWARD ? ' header-item--selected' : ''}`}
-              onClick={() => page !== WalletPage.REWARD && setPage(WalletPage.REWARD)}
-
-            >
-              <p>Reward</p>
             </div>
           </header>
           <div>

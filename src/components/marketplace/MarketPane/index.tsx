@@ -1,7 +1,8 @@
-import { Button, Tooltip } from "antd";
-import { AppstoreOutlined, BarsOutlined, ClearOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
+import {Button, Tooltip} from "antd";
+import {AppstoreOutlined, BarsOutlined, ClearOutlined, LeftOutlined, RightOutlined} from "@ant-design/icons";
 import "./MarketPane.scss";
-import { IFilterData } from "../../../pages/marketplace";
+import {IFilterData} from "../../../pages/marketplace";
+import {ChainIds, ChainsInfo} from "../../../constants/network";
 
 interface IMarketPaneProps {
   isListMode: boolean;
@@ -31,36 +32,27 @@ const MarketPane = (props: IMarketPaneProps) => {
         </Button>
         <div>
           <Button style={{margin: 0, borderRadius: 0, borderTopLeftRadius: 6, borderBottomLeftRadius: 6, 
-            backgroundColor: props.dataFilter.network === 4444 ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
+            backgroundColor: props.dataFilter.network === ChainIds.SEPOLIA ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
             onClick={() => {
-              if (props.dataFilter.network === 4444)
+              if (props.dataFilter.network === ChainIds.SEPOLIA)
                 props.funcNetwork(-1)
-              else props.funcNetwork(4444)
+              else props.funcNetwork(ChainIds.SEPOLIA)
             }}
           >
-            MBC
+            {ChainsInfo[ChainIds.SEPOLIA].name}
           </Button>
 
           <Button style={{margin: 0, borderRadius: 0,
-            backgroundColor: props.dataFilter.network === 8888 ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
+            backgroundColor: props.dataFilter.network === ChainIds.BASE ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
             onClick={() => {
-              if (props.dataFilter.network === 8888)
+              if (props.dataFilter.network === ChainIds.BASE)
                 props.funcNetwork(-1)
-              else props.funcNetwork(8888)
+              else props.funcNetwork(ChainIds.BASE)
             }}>
-            AGD
+            {ChainsInfo[ChainIds.BASE].name}
           </Button>
 
-          <Button style={{margin: 0, borderRadius: 0, borderTopRightRadius: 6, borderBottomRightRadius: 6,
-            marginRight: 10,
-            backgroundColor: props.dataFilter.network === 0 ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
-            onClick={() => {
-              if (props.dataFilter.network === 0)
-                props.funcNetwork(-1)
-              else props.funcNetwork(0)
-            }}          >
-            Cross Network
-          </Button>
+
         </div>
         <Button type="primary" size="middle" onClick={props.funcSwapFrom} >
           {
@@ -126,7 +118,6 @@ const MarketPane = (props: IMarketPaneProps) => {
             <BarsOutlined rev={""} />
           </Button>
         </Tooltip>
-
       </div>
     </div>
   );

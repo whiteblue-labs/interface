@@ -42,6 +42,7 @@
     "dotenv-webpack": "^7.1.0",
     "ethereumjs-tx": "^1.3.7",
     "ethers": "^6.6.0",
+    "fork-ts-checker-webpack-plugin": "6.5.1",
     "formik": "^2.2.9",
     "html-loader": "^3.1.0",
     "i18next": "^21.8.5",
@@ -100,7 +101,7 @@
     "build": "webpack --config build-utils/webpack.config.js --env env=prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot"
+    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot --port 5555"
   },
   "eslintConfig": {
     "extends": [

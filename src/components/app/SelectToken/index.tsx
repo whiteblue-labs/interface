@@ -6,6 +6,8 @@ import "./SelecToken.scss";
 import { useAppSelector } from "../../../state/hooks";
 import { getTokenInOtherNetwork, mappingNetwork } from "../../../utils/blockchain";
 import { requestChangeNetwork } from "../../../services/metamask";
+import {useAccount, useChains} from "wagmi";
+import token from "../../../pages/wallet/helper/Token";
 
 
 interface ISelectTokenProps {
@@ -23,7 +25,9 @@ interface ISelectTokenProps {
 const SelectToken = (props: ISelectTokenProps) => {
   const appState = useAppSelector((state) => state.appState);
   const userState = useAppSelector((state) => state.userState);
+  const {connector, chainId} = useAccount();
 
+  console.log("chainId", chainId)
   return (
     <div
       className="app-select_token"
@@ -84,8 +88,9 @@ const SelectToken = (props: ISelectTokenProps) => {
                 else return (
                   <TokenItem
                     onClickItem={async () => {
-                      if(props.isCheckNetwork) {
-                        requestChangeNetwork(item.network)
+                      const provider: any = await connector?.getProvider();
+                      if(props.isCheckNetwork && item.network !== chainId) {
+                        requestChangeNetwork(item.network, provider)
                       } 
                       else {
                          props.onClickSelect && props.onClickSelect({balance: 0, token:item})

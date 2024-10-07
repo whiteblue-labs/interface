@@ -3,7 +3,7 @@ import tokenData from '../contract/Token/data.json'
 import { IUserState } from "../state/user/userSlice"
 import { fixStringBalance } from "./string"
 import { IToken } from "../state/app/appSlice"
-import { MBC_EXCHANGE_ONE_ADDRESS, AGD_EXCHANGE_ONE_ADDRESS, AGD_EXCHANGE_TWO_ADDRESS, MBC_EXCHANGE_TWO_ADDRESS } from '../constants/contracts'
+import { BASE_EXCHANGE_ONE_ADDRESS, SEPOLIA_EXCHANGE_ONE_ADDRESS, SEPOLIA_EXCHANGE_TWO_ADDRESS, BASE_EXCHANGE_TWO_ADDRESS } from '../constants/contracts'
 import { AGD_EXPLORER, MBC_EXPLORER } from '../constants/host'
 
 export const getBalanceToken = async (myWeb3: any, userState: IUserState, token: IToken) => {
@@ -47,13 +47,13 @@ export const mappingCurrency = (chainID: number) => {
 
 // ------------------  -------------------
 export const getAddressOneChainContract = (chainID: number) => {
-    if (chainID === 8888) return AGD_EXCHANGE_ONE_ADDRESS
-    else if (chainID === 4444) return MBC_EXCHANGE_ONE_ADDRESS
+    if (chainID === 8888) return SEPOLIA_EXCHANGE_ONE_ADDRESS
+    else if (chainID === 4444) return BASE_EXCHANGE_ONE_ADDRESS
 }
 
 export const getAddressTwoChainContract = (chainID: number) => {
-    if (chainID === 8888) return AGD_EXCHANGE_TWO_ADDRESS
-    else if (chainID === 4444) return MBC_EXCHANGE_TWO_ADDRESS
+    if (chainID === 8888) return SEPOLIA_EXCHANGE_TWO_ADDRESS
+    else if (chainID === 4444) return BASE_EXCHANGE_TWO_ADDRESS
 }
 
 export const getLinkExplore = (transactionID: string | undefined, chainID: number) => {

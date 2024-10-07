@@ -1,17 +1,22 @@
-export const CHAIN_ID = [4444, 8888]
-
-export const SYMBOL = ["MBC", "AGD"]
-
-export const CHAIN_NAME = ["MBC Network", "AGD Network"]
-
-export const AGD_NETWORK = {
-    RPC: 'https://agridential.vbchain.vn/VBCinternship2023',
-    chainId: 8888 
+export enum ChainIds {
+    BASE = 8453,
+    BASE_SEPOLIA = 84532,
+    SEPOLIA = 11155111,
 }
 
-export const MBC_NETWORK = {
-    RPC: 'https://mbctest.vbchain.vn/VBCinternship2023',
-    chainId: 4444
+export const ChainsInfo = {
+    [ChainIds.BASE]: {
+        name: 'Base Network',
+        symbol: 'BASE',
+    },
+    [ChainIds.BASE_SEPOLIA]: {
+        name: 'Base Sepolia Network',
+        symbol: 'BASE_TESTNET',
+    },
+    [ChainIds.SEPOLIA]: {
+        name: 'Sepolia Network',
+        symbol: 'Sepolia',
+    },
 }
 
 interface IRPC_URL {
@@ -19,11 +24,7 @@ interface IRPC_URL {
 }
 
 export const RPC_URL : IRPC_URL= {
-    4444: 'https://mbctest.vbchain.vn/VBCinternship2023',
-    8888: 'https://agridential.vbchain.vn/VBCinternship2023'
-}
-
-export const RPC_SOCKET_URL : IRPC_URL= {
-    4444: 'wss://mbctest.vbchain.vn/VBCinternship2023',
-    8888: 'wss://agridential.vbchain.vn/VBCinternship2023'
+    [ChainIds.BASE]: 'https://mainnet.base.org',
+    [ChainIds.BASE_SEPOLIA]: 'https://sepolia.base.org',
+    [ChainIds.SEPOLIA]: 'wss://ethereum-sepolia-rpc.publicnode.com\t'
 }

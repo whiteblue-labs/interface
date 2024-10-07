@@ -7,7 +7,6 @@ import './SendToken.scss'
 import appApi from '../../../api/appAPI'
 import { saveInfo } from '../../../state/user/userSlice'
 import { getTokenContract } from '../../../services/contract'
-import { showConfirmConnectWallet } from '../../../pages/marketplace'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { getBalanceAccount, mappingNetwork } from '../../../utils/blockchain'
 import { ITask, ITaskState, createTask, doneOneTask, updateTask } from '../../../state/task/taskSlice'
@@ -26,10 +25,6 @@ const SendToken = (props : ISendToken) => {
         to: "",
     })
     const hdClickSend = () => {
-        if (!appState.isConnectedWallet) {
-            showConfirmConnectWallet(dispatch, appState, userState)
-            return
-        }
         let transferTask : ITask = {
             id: taskState.taskList.length,
             type: "TRANSFER",

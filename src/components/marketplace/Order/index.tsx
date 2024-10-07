@@ -12,6 +12,7 @@ import { getSwapOneContract, getTokenContract, getSwapTwoContract } from "../../
 import { getAddressOneChainContract, getAddressTwoChainContract, getBalanceAccount, mappingNetwork } from "../../../utils/blockchain";
 import { requestChangeNetwork } from "../../../services/metamask";
 import { fixStringBalance } from "../../../utils/string";
+import {useAccount} from "wagmi";
 
 
 interface IOrderItemProps {
@@ -22,6 +23,7 @@ interface IOrderItemProps {
 const Order = ({data, skeleton} : IOrderItemProps) => {
   const dispatch = useAppDispatch()
   const {appState, userState, taskState} = useAppSelector((state) => state)
+  const {connector} = useAccount();
 
   const buyerAccept = async  (taskState: ITaskState, idTask: number, secretKey: string | undefined) => {
     const toaster = toast.loading("Approving token...")
@@ -137,7 +139,8 @@ const Order = ({data, skeleton} : IOrderItemProps) => {
   }
   const onClickAccept = async () => {
     if (data.toValue.token.network !== userState.network) {
-      requestChangeNetwork(data.toValue.token.network);
+      const provider: any = await connector?.getProvider();
+      requestChangeNetwork(data.toValue.token.network, provider);
       return;
     }
     if (data.from.address === userState.address) {

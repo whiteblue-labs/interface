@@ -1,63 +1,27 @@
-import { useEffect } from "react";
-import { useCallback } from "react";
+import {useCallback} from "react";
 import Particles from "react-particles";
-import { loadFull } from "tsparticles";
-import type { Container, Engine, ISourceOptions } from "tsparticles-engine";
+import {loadFull} from "tsparticles";
+import type {Container, Engine, ISourceOptions} from "tsparticles-engine";
 
 import Header from "./components/header";
-import Footer from "./components/footer/Footer";
-import { LayoutProps } from "../types/route";
-import { useAppDispatch, useAppSelector } from "../state/hooks";
-import { saveTokens } from "../state/app/appSlice";
-import { Empty, FloatButton, Popconfirm, Popover } from 'antd';
-
-import appApi from "../api/appAPI";
-import { CheckCircleTwoTone, ClearOutlined, CloseCircleTwoTone, LoadingOutlined, SyncOutlined } from "@ant-design/icons";
-import { ITask, clearTask, openTaskModel } from "../state/task/taskSlice";
+import {LayoutProps} from "../types/route";
+import {useAppDispatch, useAppSelector} from "../state/hooks";
+import {Empty, FloatButton, Popconfirm, Popover} from 'antd';
+import {CheckCircleTwoTone, ClearOutlined, CloseCircleTwoTone, LoadingOutlined, SyncOutlined} from "@ant-design/icons";
+import {clearTask, ITask, openTaskModel} from "../state/task/taskSlice";
 import PairToken from "../components/app/PairToken";
-import { hdConnectWallet } from "./components/header/helper/ConnectWallet";
-import store from "../state";
+
 const Layout = ({ children }: LayoutProps) => {
   const particlesInit = useCallback(async (engine: Engine) => {
-    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(engine);
   }, []);
 
   const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {
-    },
-    []
+    async (container: Container | undefined) => {}, []
   );
 
   const taskState = useAppSelector((state) => state.taskState);
-  const userState = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    // Get info about all tokens in system.
-    async function fetchTokens() {
-      const tokens = await appApi.getTokens();
-      if (tokens){
-        dispatch(saveTokens(tokens.data));
-      }
-
-      let storeData = store.getState();
-
-      if (new Date(storeData.userState.expiredTime) > new Date()) {
-        if (window.ethereum) {
-          window.ethereum._metamask.isUnlocked().then(async (res: any) => {
-              res && await hdConnectWallet()
-          })
-        }
-      }
-    }
-    // Clear modal in application
-    fetchTokens()
-
-  }, [])    
-  
 
   const getTitleTask = (type: string)  => {
     switch (type) {

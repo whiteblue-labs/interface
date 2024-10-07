@@ -12,6 +12,7 @@ import appApi from "../../../api/appAPI";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { useEffect, useState } from "react";
 import { requestChangeNetwork } from "../../../services/metamask";
+import {useAccount} from "wagmi";
 
 const baseTable = [
   { title: "ID", size: 0.1},
@@ -28,6 +29,7 @@ export default function TableOrder(props : any) {
   const dispatch = useAppDispatch()
   const {appState, userState, taskState} = useAppSelector(state => state)
   const [data, setData] = useState<any>(null)
+  const {connector} = useAccount();
 
   useEffect(() => {
     if (data !== null) {
@@ -157,7 +159,8 @@ export default function TableOrder(props : any) {
   }
   const onClickAccept = async () => {
     if (data?.toValue.token.network !== userState.network) {
-      requestChangeNetwork(data?.toValue.token.network);
+      const provider: any = await connector?.getProvider();
+      requestChangeNetwork(data?.toValue.token.network, provider);
       return;
     }
     if (data?.from.address === userState.address) {

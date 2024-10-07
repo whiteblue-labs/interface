@@ -1,5 +1,4 @@
 import Web3 from "web3"
-import { IUserState } from "../state/user/userSlice"
 import { RPC_URL } from "../constants/network"
 import { getSwapTwoContract, getSwapOneContract} from "./contract"
 

@@ -17,6 +17,7 @@ import PairToken from "../../app/PairToken";
 import { generateContractID, getTxTwoOnchain  } from "../../../services/blockchain";
 import store from "../../../state";
 import { fixStringBalance } from "../../../utils/string";
+import {useAccount} from "wagmi";
 interface IMyOrderItem {
   data: any
   isPendingOrder?: boolean;
@@ -36,7 +37,9 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
   });
   const [dataOnChain, setDataOnChain] = useState<any>(null)
   const IS_SELLER : boolean = userState.address === data.from.address;
-  
+  const {connector} = useAccount();
+
+
   const getDataOnChain = async () => {
     const sellerLock = await getTxTwoOnchain(
       generateContractID(appState.web3, data._id, data.from.address, data.to.address), 
@@ -83,7 +86,8 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
     // Check whether the order is swap one chain or two chain.
     if (data.fromValue.token.network === data.toValue.token.network) {
       if (userState.network !== data.fromValue.token.network) {
-        requestChangeNetwork(data.fromValue.token.network)
+        const provider: any = await connector?.getProvider();
+        requestChangeNetwork(data.fromValue.token.network, provider)
         return
       }      
       task = {...task, type: "REMOVE", funcExecute: removeOrder1Chain}
@@ -382,7 +386,8 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
     }
     let networkAction = IS_SELLER ? data.fromValue.token.network : data.toValue.token.network;
     if (storeData.userState.network !== networkAction) {
-      await requestChangeNetwork(networkAction)
+      const provider: any = await connector?.getProvider();
+      await requestChangeNetwork(networkAction, provider)
       return;
     }
     let task: ITask = {
@@ -452,16 +457,17 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
     setRemoveBtn(myBtn)
   }
   const hdOnOk = async (status: string) => {
+    const provider: any = await connector?.getProvider();
     if (IS_SELLER) {
       if (status === "receiver accepted") {
         if (data.fromValue.token.network !== userState.network) {
-          await requestChangeNetwork(data.fromValue.token.network);
+          await requestChangeNetwork(data.fromValue.token.network, provider);
           return;
         }
         return onSellerClickDeposit()
       } else if (status === "receiver withdrawn") {
         if (data.toValue.token.network !== userState.network) {
-          await requestChangeNetwork(data.toValue.token.network);
+          await requestChangeNetwork(data.toValue.token.network, provider);
           return;
         }
         return onSellerClickWithdraw()
@@ -472,7 +478,7 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
     else {
       if (status === "sender accepted") {
         if (data.fromValue.token.network !== userState.network) {
-          await requestChangeNetwork(data.fromValue.token.network);
+          await requestChangeNetwork(data.fromValue.token.network, provider);
           return;
         }
         return onBuyerClickWithdraw()

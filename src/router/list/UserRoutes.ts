@@ -9,7 +9,7 @@ const UserRoutes: Array<RouteProps> = [
         title: "Create",
       },
       {
-        path: "/marketplace/my-order",
+        path: "my-order",
         element: MyOrder,
         title: "My Order",
       },

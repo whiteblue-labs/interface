@@ -4,7 +4,9 @@
     "market": "Marketplace",
     "rewards": "Rewards",
     "faucet": "Faucet",
-    "about": "About"
+    "about": "About",
+    "my-order": "My Order",
+    "wallet": "My Wallet"
   },
   "footer": {
     "sitemap": "Sitemap",

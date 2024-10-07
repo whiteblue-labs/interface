@@ -4,7 +4,6 @@ import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
 import "./index.scss";
-import '@rainbow-me/rainbowkit/styles.css'
 import {Provider} from "react-redux";
 import store, {persistor} from "./state";
 import {PersistGate} from "redux-persist/lib/integration/react";
@@ -29,7 +28,7 @@ const config = createConfig(
       [base.id]: http(),
       [sepolia.id]: http(),
     },
-    walletConnectProjectId: 'd2ef97836db7eb390bcb2c1e9847ecdc',
+    walletConnectProjectId: '',
     appName: "WhiteBlueSwap",
   }),
 );

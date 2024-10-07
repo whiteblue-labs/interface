@@ -22,7 +22,6 @@ const getToken = async () => {
         )
         return res?.data
       } catch (error) {
-
         console.log(error)
         store.dispatch(clearInfo());
         store.dispatch(clearWeb3())

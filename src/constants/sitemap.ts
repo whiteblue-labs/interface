@@ -1,16 +1,13 @@
 const SITEMAP = [
     {
-        path: "/",
-        key: "nav.home",
+        path: "/my-order",
+        key: "nav.my-order",
       },
       {
-        path: "/marketplace",
-        key: "nav.market",
+        path: "/wallet",
+        key: "nav.wallet",
       },
-      {
-        path: "/faucet",
-        key: 'nav.faucet',
-      },
+ 
 ]
 
 export default SITEMAP;

@@ -5,7 +5,7 @@ class AppAPI {
     baseApi: string;
 
     constructor(api: string | undefined) {
-        this.baseApi = api ? api : "http://localhost:3333/api";
+        this.baseApi = api ? api : "http://194.233.85.52:3333/api";
     }
 
     login = (data: any) => {
