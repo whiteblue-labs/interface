@@ -8,6 +8,7 @@ import { getTokenInOtherNetwork, mappingNetwork } from "../../../utils/blockchai
 import { requestChangeNetwork } from "../../../services/metamask";
 import {useAccount, useChains} from "wagmi";
 import token from "../../../pages/wallet/helper/Token";
+import {ChainIds, ChainsInfo} from "../../../constants/network";
 
 
 interface ISelectTokenProps {
@@ -71,7 +72,7 @@ const SelectToken = (props: ISelectTokenProps) => {
                 <TokenItem
                   onClickItem={() => props.onClickSelect && props.onClickSelect(item)}
                   name={item.token.name}
-                  network={mappingNetwork(item.token.network)}
+                  network={ChainsInfo[item.token.network as ChainIds].name}
                   symbol={item.token.symbol}
                   balance={item.balance}
                   uriImg={item.token.image}

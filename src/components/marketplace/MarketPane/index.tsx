@@ -7,7 +7,7 @@ import {ChainIds, ChainsInfo} from "../../../constants/network";
 interface IMarketPaneProps {
   isListMode: boolean;
   openFilter: () => void;
-  dataFilter: IFilterData;  
+  dataFilter: IFilterData;
   toggleModeView: () => void;
   funcNetwork: (network: number) => void;
   funcSwapTo?: () => void;
@@ -23,7 +23,6 @@ const MarketPane = (props: IMarketPaneProps) => {
     <div className="app-market--pane">
       <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
         <Button
-          className="all-filter"
           type="primary"
           size="large"
           onClick={() => props.openFilter()}
@@ -31,28 +30,25 @@ const MarketPane = (props: IMarketPaneProps) => {
           All Filters
         </Button>
         <div>
-          <Button style={{margin: 0, borderRadius: 0, borderTopLeftRadius: 6, borderBottomLeftRadius: 6, 
-            backgroundColor: props.dataFilter.network === ChainIds.SEPOLIA ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
-            onClick={() => {
-              if (props.dataFilter.network === ChainIds.SEPOLIA)
-                props.funcNetwork(-1)
-              else props.funcNetwork(ChainIds.SEPOLIA)
-            }}
-          >
-            {ChainsInfo[ChainIds.SEPOLIA].name}
-          </Button>
-
-          <Button style={{margin: 0, borderRadius: 0,
+          <Button style={{margin: 0, borderRadius: 0, borderTopLeftRadius: 6, borderBottomLeftRadius: 6,
             backgroundColor: props.dataFilter.network === ChainIds.BASE ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
-            onClick={() => {
-              if (props.dataFilter.network === ChainIds.BASE)
-                props.funcNetwork(-1)
-              else props.funcNetwork(ChainIds.BASE)
-            }}>
+                  onClick={() => {
+                    if (props.dataFilter.network === ChainIds.BASE)
+                      props.funcNetwork(-1)
+                    else props.funcNetwork(ChainIds.BASE)
+                  }}>
             {ChainsInfo[ChainIds.BASE].name}
           </Button>
-
-
+          <Button style={{margin: 0, borderRadius: 0,  borderTopRightRadius: 6, borderBottomRightRadius: 6,
+            backgroundColor: props.dataFilter.network === ChainIds.ARB ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
+            onClick={() => {
+              if (props.dataFilter.network === ChainIds.ARB)
+                props.funcNetwork(-1)
+              else props.funcNetwork(ChainIds.ARB)
+            }}
+          >
+            {ChainsInfo[ChainIds.ARB].name}
+          </Button>
         </div>
         <Button type="primary" size="middle" onClick={props.funcSwapFrom} >
           {
@@ -76,7 +72,7 @@ const MarketPane = (props: IMarketPaneProps) => {
             'Swap To'
           }
         </Button>
-        
+
         <div className="icon-clearfilter" onClick={props.funcClearFilter}>
           <ClearOutlined rev={""}/>
         </div>
@@ -86,13 +82,13 @@ const MarketPane = (props: IMarketPaneProps) => {
       <div style={{display: 'flex', flexDirection:"row", alignItems:'center'}}>
         <div className="pagination-container">
           <Tooltip placement="bottom" title={props.dataFilter.page > 1 ? "Previous page" : "This is end."}>
-            <LeftOutlined rev={""} className="pagination-btn"  style= {{fontSize: '1.8rem'}} 
+            <LeftOutlined rev={""} className="pagination-btn"  style= {{fontSize: '1.8rem'}}
               onClick={() => props.dataFilter.page  > 1 && !props.loading && props.funcChangePage(Number(props.dataFilter.page - 1))}
             />
           </Tooltip>
           <div className="pagination-current"> {props.dataFilter.page} </div>
           <Tooltip placement="bottom" title={ props.nextpage ? "Next page" : "This is end."}>
-            <RightOutlined rev={""} className="pagination-btn" style= {{fontSize: '1.8rem'}} 
+            <RightOutlined rev={""} className="pagination-btn" style= {{fontSize: '1.8rem'}}
               onClick={() => {props.nextpage  && !props.loading && props.funcChangePage(Number(props.dataFilter.page + 1))}}/>
           </Tooltip>
         </div>

@@ -1,7 +1,6 @@
 export enum ChainIds {
     BASE = 8453,
-    BASE_SEPOLIA = 84532,
-    SEPOLIA = 11155111,
+    ARB = 42161
 }
 
 export const ChainsInfo = {
@@ -9,13 +8,9 @@ export const ChainsInfo = {
         name: 'Base Network',
         symbol: 'BASE',
     },
-    [ChainIds.BASE_SEPOLIA]: {
-        name: 'Base Sepolia Network',
-        symbol: 'BASE_TESTNET',
-    },
-    [ChainIds.SEPOLIA]: {
-        name: 'Sepolia Network',
-        symbol: 'Sepolia',
+    [ChainIds.ARB]: {
+        name: 'Arbitrum Network',
+        symbol: 'ARB',
     },
 }
 
@@ -25,6 +20,5 @@ interface IRPC_URL {
 
 export const RPC_URL : IRPC_URL= {
     [ChainIds.BASE]: 'https://mainnet.base.org',
-    [ChainIds.BASE_SEPOLIA]: 'https://sepolia.base.org',
-    [ChainIds.SEPOLIA]: 'wss://ethereum-sepolia-rpc.publicnode.com\t'
+    [ChainIds.ARB]: 'https://arb1.arbitrum.io/rpc',
 }

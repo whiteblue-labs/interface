@@ -3,8 +3,9 @@ import tokenData from '../contract/Token/data.json'
 import { IUserState } from "../state/user/userSlice"
 import { fixStringBalance } from "./string"
 import { IToken } from "../state/app/appSlice"
-import { BASE_EXCHANGE_ONE_ADDRESS, SEPOLIA_EXCHANGE_ONE_ADDRESS, SEPOLIA_EXCHANGE_TWO_ADDRESS, BASE_EXCHANGE_TWO_ADDRESS } from '../constants/contracts'
-import { AGD_EXPLORER, MBC_EXPLORER } from '../constants/host'
+import { BASE_SWAP_SAME_CHAIN, ARB_SWAP_SAME_CHAIN, ARB_SWAP_CROSS_CHAIN, BASE_SWAP_CROSS_CHAIN } from '../constants/contracts'
+import {ChainIds, ChainsInfo} from "../constants/network";
+import {ARB_EXPLORER, BASE_EXPLORER} from "../constants/host";
 
 export const getBalanceToken = async (myWeb3: any, userState: IUserState, token: IToken) => {
     const tokenABI = tokenData.abi;
@@ -13,9 +14,8 @@ export const getBalanceToken = async (myWeb3: any, userState: IUserState, token:
         {from: userState.address}
     )
     const decimals = await tokenContract.methods.decimals().call({from: userState.address})
-
-
     balance = fixStringBalance(balance.toString(), Number(decimals))
+    console.log(balance)
     return {token, balance}
 }
 
@@ -36,29 +36,27 @@ export const getTokenInOtherNetwork = (tokenState: IToken[], userState: IUserSta
 
 // ------------------ Mapping -------------------
 export const mappingNetwork = (chainID: number) => {
-    if (chainID === 8888) return "AGD Network"
-    else if (chainID === 4444) return "MBC Network"
+    return ChainsInfo[chainID as ChainIds].name
 }
 
 export const mappingCurrency = (chainID: number) => {
-    if (chainID === 4444) return "MBC"
-    else if (chainID === 8888) return "AGD"
+    return "ETH";
 }
 
 // ------------------  -------------------
 export const getAddressOneChainContract = (chainID: number) => {
-    if (chainID === 8888) return SEPOLIA_EXCHANGE_ONE_ADDRESS
-    else if (chainID === 4444) return BASE_EXCHANGE_ONE_ADDRESS
+    if (chainID === ChainIds.ARB) return ARB_SWAP_SAME_CHAIN
+    else if (chainID === ChainIds.BASE) return BASE_SWAP_SAME_CHAIN
 }
 
 export const getAddressTwoChainContract = (chainID: number) => {
-    if (chainID === 8888) return SEPOLIA_EXCHANGE_TWO_ADDRESS
-    else if (chainID === 4444) return BASE_EXCHANGE_TWO_ADDRESS
+    if (chainID === ChainIds.ARB) return ARB_SWAP_CROSS_CHAIN
+    else if (chainID === 4444) return BASE_SWAP_CROSS_CHAIN
 }
 
 export const getLinkExplore = (transactionID: string | undefined, chainID: number) => {
-    if (chainID === 8888) return AGD_EXPLORER.concat(`/tx/${transactionID}`)
-    else if (chainID === 4444) return MBC_EXPLORER.concat(`/tx/${transactionID}`)
+    if (chainID === ChainIds.ARB) return ARB_EXPLORER.concat(`/tx/${transactionID}`)
+    else if (chainID === ChainIds.BASE) return BASE_EXPLORER.concat(`/tx/${transactionID}`)
 }
 
 

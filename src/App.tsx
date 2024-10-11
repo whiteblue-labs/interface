@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadingPage from "./components/app/LoadingPage";
 import ModalPage from "./components/app/ModalPage";
 import {closeTaskModel, doneOneTask, updateTask} from "./state/task/taskSlice";
-import {useAccount, useConnect, useDisconnect} from "wagmi";
+import {useAccount, useConnect, useDisconnect, useSignMessage} from "wagmi";
 import {ConnectKitProvider} from "connectkit";
 import Web3 from "web3";
 import appApi from "./api/appAPI";
@@ -16,12 +16,13 @@ import {IUserState, saveInfo} from "./state/user/userSlice";
 import {fixStringBalance} from "./utils/string";
 import {getBalanceAccount} from "./utils/blockchain";
 import {saveTokens, saveWeb3} from "./state/app/appSlice";
-import {signatureLogin} from "./layouts/components/header/helper/ConnectWallet";
 
 function App() {
   const { connectors   } = useConnect();
   const { isConnected, connector } = useAccount()
   const { disconnect } = useDisconnect()
+  const { signMessageAsync } = useSignMessage()
+
 
   const handleOnConnect = async (address?: string, connectorId?: string) => {
     const connector = connectors.find(item => item.id === connectorId);
@@ -31,7 +32,7 @@ function App() {
     const provider: any = await connector.getProvider();
     const myWeb3 = new Web3(provider);
     try {
-      const signature = await signatureLogin(myWeb3, address);
+      const signature = await signMessageAsync({message: "Verify Account"});
       const res = await appApi.login({
         address: address,
         signature: signature,

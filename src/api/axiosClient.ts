@@ -6,6 +6,7 @@ import { clearInfo, updateToken } from "../state/user/userSlice";
 import appApi from "./appAPI";
 import jwt_decode from "jwt-decode";
 import { clearWeb3 } from "../state/app/appSlice";
+
 const getToken = async () => {
   let storeData = store.getState();
   let currentTime = new Date();

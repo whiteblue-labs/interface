@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
     "@babel/polyfill": "^7.12.1",
+    "@coinbase/onchainkit": "^0.33.6",
     "@emotion/react": "^11.11.1",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
@@ -101,8 +102,7 @@
     "build": "webpack --config build-utils/webpack.config.js --env env=prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot --port 5555"
-  },
+    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot --port 5555 --host 0.0.0.0"  },
   "eslintConfig": {
     "extends": [
       "react-app",

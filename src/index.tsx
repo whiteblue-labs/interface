@@ -10,11 +10,13 @@ import {PersistGate} from "redux-persist/lib/integration/react";
 import {BrowserRouter} from "react-router-dom";
 import {I18nextProvider} from "react-i18next";
 import i18next from "./translation";
-import {createConfig, http, WagmiProvider} from "wagmi";
+import {cookieStorage, createConfig, createStorage, http, WagmiProvider} from "wagmi";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ToastContainer} from "react-toastify";
-import {base, mainnet, sepolia} from "viem/chains";
+import {arbitrum, base} from "viem/chains";
 import {getDefaultConfig} from "connectkit";
+import { coinbaseWallet } from "wagmi/connectors";
+import { injected } from "wagmi/connectors";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -22,12 +24,21 @@ const queryClient = new QueryClient();
 
 const config = createConfig(
   getDefaultConfig({
-    chains: [mainnet, sepolia, base],
+    chains: [base, arbitrum],
     transports: {
-      [mainnet.id]: http(),
       [base.id]: http(),
-      [sepolia.id]: http(),
+      [arbitrum.id]: http(),
     },
+    connectors: [
+      injected(),
+      coinbaseWallet({
+        appName: 'Create Wagmi',
+        preference: 'smartWalletOnly',
+      }),
+    ],
+    storage: createStorage({
+      storage: cookieStorage,
+    }),
     walletConnectProjectId: '',
     appName: "WhiteBlueSwap",
   }),
