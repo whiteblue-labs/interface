@@ -20,11 +20,8 @@ const TokenItemWallet = (props : any) => {
             </div>
 
         <div className='token-item-right'>
-
-            <p className='balance-token'>{data.balance} {data.token.symbol}</p>        
-
+            <p className='balance-token'>{String(data.balance).length > 5 ? Number(data.balance).toFixed(5) : data.balance} {data.token.symbol}</p>
             <div className='action-token'>
-            
                 <Tooltip title = "Copy address token.">
                     <CopyOutlined rev={""} className='action-icon'
                         onClick={() => {
@@ -33,7 +30,6 @@ const TokenItemWallet = (props : any) => {
                         }}
                     />
                 </Tooltip>
-            
                 <Tooltip title="Send tokens to the destination you want." style={{textAlign:'center'}}>
                     <SendOutlined rev={""} className='action-icon' onClick={() => props.onClickSend()}/>
                 </Tooltip>

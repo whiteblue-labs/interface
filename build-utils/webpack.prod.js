@@ -1,12 +1,15 @@
 const { DefinePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
-
 module.exports = {
-    mode: 'production',
+    mode: 'development',
+    devtool: 'eval-source-map',
     plugins: [
         new Dotenv({
-          systemvars: true
+            path: path.resolve(__dirname, '..', './.env'),
         })
-      ]
-  };
+    ],
+    devServer: {
+        allowedHosts: ['whiteblueswap.xyz']
+    }
+};

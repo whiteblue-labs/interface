@@ -87,10 +87,10 @@
     "sass": "^1.52.1",
     "ts-loader": "^9.3.0",
     "tsparticles": "^2.10.1",
-    "typescript": "^5.6.2",
+    "typescript": "5.4.5",
     "uuid": "^9.0.0",
     "viem": "2.x",
-    "wagmi": "^2.12.17",
+    "wagmi": "2.12.11",
     "web-vitals": "^2.1.0",
     "web3": "1.8.0",
     "webpack": "^5.72.1",
@@ -102,7 +102,8 @@
     "build": "webpack --config build-utils/webpack.config.js --env env=prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot --port 5555 --host 0.0.0.0"  },
+    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot --port 3000"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

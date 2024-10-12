@@ -7,21 +7,20 @@ import { BASE_SWAP_SAME_CHAIN, ARB_SWAP_SAME_CHAIN, ARB_SWAP_CROSS_CHAIN, BASE_S
 import {ChainIds, ChainsInfo} from "../constants/network";
 import {ARB_EXPLORER, BASE_EXPLORER} from "../constants/host";
 
-export const getBalanceToken = async (myWeb3: any, userState: IUserState, token: IToken) => {
+export const getBalanceToken = async (myWeb3: any, address: string, token: IToken) => {
     const tokenABI = tokenData.abi;
     const tokenContract = new myWeb3.eth.Contract(tokenABI, token.deployedAddress);
-    let balance = await tokenContract.methods.balanceOf(userState.address).call(
-        {from: userState.address}
+    let balance = await tokenContract.methods.balanceOf(address).call(
+        {from: address}
     )
-    const decimals = await tokenContract.methods.decimals().call({from: userState.address})
+    const decimals = await tokenContract.methods.decimals().call({from: address})
     balance = fixStringBalance(balance.toString(), Number(decimals))
-    console.log(balance)
     return {token, balance}
 }
 
 export const getBalanceAccount = async (myWeb3: any, userState: IUserState, tokenState: IToken[]) : Promise<IAsset[]> => {
     const tokensInMyNetwork = tokenState.filter((value) => value.network === userState.network)
-    return Promise.all(tokensInMyNetwork.map((token: IToken) => getBalanceToken(myWeb3, userState, token)))
+    return Promise.all(tokensInMyNetwork.map((token: IToken) => getBalanceToken(myWeb3, userState.address, token)))
 }
 
 export const getTokenInOtherNetwork = (tokenState: IToken[], userState: IUserState) => {

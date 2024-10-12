@@ -202,7 +202,7 @@ export default function CreateOrder() {
     const toastify = toast.loading("Check your balance...");
     dispatch(updateTask({task, id: idTask}))
     try {
-      const balance = await getBalanceToken(appState.web3, userState, formData.from.token)
+      const balance = await getBalanceToken(appState.web3, userState.address, formData.from.token)
       if (Number(balance) < Number(formData.from.amount)) {
         toast.update(toastify, {
           render: "Insufficient balance",
@@ -328,7 +328,7 @@ export default function CreateOrder() {
               <InputNumber
                 placeholder="0.0"
                 min={0}
-                precision={2}
+                precision={5}
                 value={formData.from.amount}
                 onChange={(e) =>
                   setFormData({ ...formData, from: {...formData.from, amount: Number(e)}})
@@ -345,7 +345,8 @@ export default function CreateOrder() {
                 >
                   MAX
                 </Button>
-                <p>Available: {formData.from.balance}</p>
+                <p>Available: {
+                  String(formData.from.balance).length > 5 ? Number(formData.from.balance).toFixed(5) : formData.from.balance}</p>
               </div>
             </div>
           </div>
@@ -412,7 +413,9 @@ export default function CreateOrder() {
                 >
                   MAX
                 </Button>
-                <p>Available: {formData.to.balance}</p>
+                <p>Available:
+                  {String(formData.to.balance).length > 5 ? Number(formData.to.balance).toFixed(5) : formData.to.balance}
+                </p>
               </div>
             </div>
           </div>

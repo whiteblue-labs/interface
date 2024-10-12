@@ -57,7 +57,7 @@ export const TokenItem = (props: ITokenItemProps) => {
           color: "#169ccc",
         }}
       >
-        {props.balance} {props.symbol}{" "}
+        { String(props.balance).length > 5 ? Number(props.balance).toFixed(5) : props.balance } {props.symbol}{" "}
       </p>
     </div>
   );
