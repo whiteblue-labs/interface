@@ -102,8 +102,8 @@
     "build": "webpack --config build-utils/webpack.config.js --env env=prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot --port 3000"
-  },
+    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && webpack serve --config build-utils/webpack.config.js --env env=dev --open --hot --port 5555 --host 0.0.0.0"
+},
   "eslintConfig": {
     "extends": [
       "react-app",
