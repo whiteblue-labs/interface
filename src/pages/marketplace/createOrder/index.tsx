@@ -436,7 +436,7 @@ export default function CreateOrder() {
                     }
                     to_img={formData.to.token !== "" ? formData.to.token.image : null}
                   />
-                  <p className="average">{Number(rate).toFixed(3)}</p>
+                  <p className="average">$2,464.29</p>
                 </div>
               }
               <div
