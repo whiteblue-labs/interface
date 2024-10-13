@@ -107,9 +107,9 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
       
       const refundMethod = exchangeContract.methods.refund( data.contractId )
 
-      await refundMethod.estimateGas({from: userState.address})
+      const gas = await refundMethod.estimateGas({from: userState.address})
 
-      const refundRecepit = await refundMethod.send({from: userState.address})
+      const refundRecepit = await refundMethod.send({from: userState.address, gas})
       
       task = {...task, status: 2, transactionHash: refundRecepit.transactionHash}
       dispatch(updateTask({ task, id: task.id }))
@@ -172,9 +172,9 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
           secretKey?.data
         )
         
-        await withdrawMethod.estimateGas({from: userState.address})
+        const gas = await withdrawMethod.estimateGas({from: userState.address})
 
-        const withdrawReceipt = await withdrawMethod.send({from: userState.address})
+        const withdrawReceipt = await withdrawMethod.send({from: userState.address, gas})
 
         dispatch(saveInfo({...userState, 
           wallet: await getBalanceAccount(appState.web3, userState, appState.tokens),
@@ -231,9 +231,9 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
           generateContractID(appState.web3, data._id, data.from.address, data.to.address),
           secretKey?.toString()
         )
-        await withdrawMethod.estimateGas({from: userState.address})
+        const gas = await withdrawMethod.estimateGas({from: userState.address})
 
-        const withdrawReceipt = await withdrawMethod.send({from: userState.address})
+        const withdrawReceipt = await withdrawMethod.send({from: userState.address, gas})
 
         dispatch(saveInfo({...userState, 
           wallet: await getBalanceAccount(appState.web3, userState, appState.tokens),
@@ -274,6 +274,7 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
   }
   const onSellerClickDeposit = () => {
     const sellerDeposit = async (taskState: ITaskState, idTask: number) => {
+      console.log('sellerDeposit')
       const toaster = toast.loading("Approving token...")
       let task : ITask = {...taskState.taskList[idTask], status: 1}
       dispatch(updateTask({task, id: idTask}))
@@ -291,6 +292,15 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
         dispatch(updateTask({ task: task, id: task.id}))
         toast.update(toaster, { render: "Deposit token...", type: "default", isLoading: true});
 
+
+        console.log({
+          id: appState.web3.utils.soliditySha3(data._id),
+          address: data.to.address,
+          token: data.fromValue.token.deployedAddress,
+          amount: BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.fromValue.token.deployedAddress]) * Number(data.fromValue.amount)),
+          lock: data.hashlock,
+          check: true,
+        })
         const createMethod = await  exchangeContract.methods.create(
           appState.web3.utils.soliditySha3(data._id),
           data.to.address,
@@ -299,8 +309,8 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
           data.hashlock,
           true,
         )
-        await createMethod.estimateGas({from: userState.address})
-        const createReceipt = await createMethod.send({from: userState.address})
+        const gas = await createMethod.estimateGas({from: userState.address})
+        const createReceipt = await createMethod.send({from: userState.address, gas})
 
 
         console.log(await appApi.updateStatusOrder(data._id, "sender accepted")
@@ -362,8 +372,8 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
             Number(nonce),
             signatureAdmin.data,
           )
-          console.log(await refundMethod.estimateGas({from: storeData.userState.address}))
-          const refundReceipt = await refundMethod.send({from: storeData.userState.address})
+          const gas = await refundMethod.estimateGas({from: storeData.userState.address})
+          const refundReceipt = await refundMethod.send({from: storeData.userState.address, gas})
           const cancelOrder = await appApi.cancelOrder(data._id)
           myTask = {...taskState.taskList[idTask], status: 3, transactionHash: refundReceipt.transactionHash}
           dispatch(updateTask({task: myTask, id: idTask}))

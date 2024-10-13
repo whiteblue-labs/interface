@@ -6,7 +6,7 @@ export const signatureLogin = async (web3: any, userAddress: string) : Promise<s
 };
 
 const ConnectWallet = () => {
-    return <ConnectKitButton label={'0x2032C216cE3B726702E2E8E4b78Ef2aeCC4847D1'}  />
+    return <ConnectKitButton  />
 };
 
 export default ConnectWallet;

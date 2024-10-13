@@ -31,6 +31,7 @@ export const getSwapTwoContract = (web3: any, chainID: number) => {
       SwapTwoChainData.abi, ARB_SWAP_CROSS_CHAIN
     )
   }
+
   return new web3.eth.Contract(
     SwapTwoChainData.abi, BASE_SWAP_CROSS_CHAIN
   )

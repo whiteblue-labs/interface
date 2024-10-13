@@ -52,15 +52,11 @@ export default function TableOrder(props : any) {
     return itemData
   })
 
-
-
   const buyerAccept = async  (taskState: ITaskState, idTask: number, secretKey: string | undefined) => {
+    console.log('buyerAccept')
     const toaster = toast.loading("Approving token...")
     let task : ITask = {...taskState.taskList[idTask], status: 1}
     dispatch(updateTask({task, id: idTask}))
-
-    
-
     try {
       const swapContract = getSwapTwoContract(appState.web3, userState.network);
       const tokenContract = getTokenContract(appState.web3, data.toValue.token.deployedAddress)
@@ -78,15 +74,19 @@ export default function TableOrder(props : any) {
       }))
 
       toast.update(toaster, { render: "Depositing token...", type: "default", isLoading: true});
-      
-      const createRecepit = await swapContract.methods.create(
+
+      const createMethod = await swapContract.methods.create(
         appState.web3.utils.keccak256(data?._id),
         data?.from.address,
         data?.toValue.token.deployedAddress,
         BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data?.toValue.amount)),
         appState.web3.utils.keccak256(secretKey),
         false,
-      ).send({from: userState.address})
+      )
+
+      const gas = await createMethod.estimateGas({from: userState.address})
+      const createRecepit = await createMethod.send({from: userState.address, gas})
+
 
       // Save order to database
       await appApi.acceptOder(
@@ -132,9 +132,9 @@ export default function TableOrder(props : any) {
       
       const swapMethod = swapContract.methods.acceptTx(data?.contractId)
 
-      await swapMethod.estimateGas({from: userState.address})
+      const gas = await swapMethod.estimateGas({from: userState.address})
 
-      const acceptRecepit = await swapMethod.send({from: userState.address})
+      const acceptRecepit = await swapMethod.send({from: userState.address, gas})
 
       await appApi.acceptOder(data?._id)
       

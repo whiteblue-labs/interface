@@ -40,9 +40,9 @@ const Order = ({data, skeleton} : IOrderItemProps) => {
         SWAP_ADDRESS_CONTRACT,
         BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data.toValue.amount)),
       ).send({from: userState.address})
-      
+
       dispatch(updateTask({
-        task: {...task, status: 2}, 
+        task: {...task, status: 2},
         id: task.id
       }))
 
@@ -56,8 +56,8 @@ const Order = ({data, skeleton} : IOrderItemProps) => {
         appState.web3.utils.keccak256(secretKey),
         false,
       )
-      await createMethod.estimateGas({from: userState.address})
-      const createReceipt = await createMethod.send({from: userState.address})
+      const gas = await createMethod.estimateGas({from: userState.address})
+      const createReceipt = await createMethod.send({from: userState.address, gas: gas})
 
       // Save order to database
       await appApi.acceptOder(
@@ -108,9 +108,9 @@ const Order = ({data, skeleton} : IOrderItemProps) => {
       
       const swapMethod = swapContract.methods.acceptTx(data.contractId)
 
-      await swapMethod.estimateGas({from: userState.address})
+      const gas = await swapMethod.estimateGas({from: userState.address})
 
-      const acceptRecepit = await swapMethod.send({from: userState.address})
+      const acceptRecepit = await swapMethod.send({from: userState.address, gas})
 
       await appApi.acceptOder(data._id)
       dispatch(saveInfo({...userState, 

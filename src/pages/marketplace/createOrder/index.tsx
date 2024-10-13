@@ -154,8 +154,8 @@ export default function CreateOrder() {
         formData.to.token.deployedAddress,
         BigInt(10 ** Number(DECIMALS_FOR_TOKEN[formData.from.token.deployedAddress]) * Number(formData.from.amount)),
         BigInt(10 ** Number(DECIMALS_FOR_TOKEN[formData.to.token.deployedAddress]) * Number(formData.to.amount)),
-      ).send({from: userState.address})
-      
+      )
+
       // Save order to database
       const orderData = await appApi.createOrder({
         fromValue: formData.from.amount,
@@ -397,7 +397,7 @@ export default function CreateOrder() {
               <InputNumber
                 placeholder="0.0"
                 min={0}
-                precision={2}
+                precision={5}
                 value={formData.to.amount}
                 onChange={(e) =>
                   setFormData({ ...formData, to: {...formData.to, amount: Number(e)}})
