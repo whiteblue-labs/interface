@@ -18,6 +18,7 @@ import { generateContractID, getTxTwoOnchain  } from "../../../services/blockcha
 import store from "../../../state";
 import { fixStringBalance } from "../../../utils/string";
 import {useAccount} from "wagmi";
+import {DECIMALS_FOR_TOKEN} from "../../../constants/contracts";
 interface IMyOrderItem {
   data: any
   isPendingOrder?: boolean;
@@ -283,7 +284,7 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
         
         await tokenContract.methods.approve(
           SWAP_ADDRESS_CONTRACT,
-          BigInt(10 ** Number(18) * Number(data.fromValue.amount)),
+          BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.fromValue.token.deployedAddress]) * Number(data.fromValue.amount)),
         ).send({from: userState.address})
 
         task = {...task, status: 2}
@@ -294,7 +295,7 @@ const MyOrderItem = ({data, isPendingOrder, rerender} : IMyOrderItem) => {
           appState.web3.utils.soliditySha3(data._id),
           data.to.address,
           data.fromValue.token.deployedAddress,
-          BigInt(10 ** Number(18) * Number(data.fromValue.amount)),
+          BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.fromValue.token.deployedAddress]) * Number(data.fromValue.amount)),
           data.hashlock,
           true,
         )

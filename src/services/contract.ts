@@ -6,6 +6,7 @@ import {
   BASE_SWAP_SAME_CHAIN, ARB_SWAP_SAME_CHAIN,
   BASE_SWAP_CROSS_CHAIN, ARB_SWAP_CROSS_CHAIN,
 } from '../constants/contracts'
+import { ChainIds } from '../constants/network'
 
 export const getTokenContract = (web3: any, address: string) => {
   return new web3.eth.Contract(
@@ -14,26 +15,24 @@ export const getTokenContract = (web3: any, address: string) => {
 }
 
 export const getSwapOneContract = (web3: any, chainID: number) => {
-  if (chainID === 8888) {
+  if (chainID === ChainIds.ARB) {
     return new web3.eth.Contract(
       SwapOneChainData.abi, ARB_SWAP_SAME_CHAIN
     )
-  } else {
-    return new web3.eth.Contract(
-      SwapOneChainData.abi, BASE_SWAP_SAME_CHAIN
-    )
   }
+  return new web3.eth.Contract(
+    SwapOneChainData.abi, BASE_SWAP_SAME_CHAIN
+  )
 }
 
 export const getSwapTwoContract = (web3: any, chainID: number) => {
-  if (chainID === 8888) {
+  if (chainID === ChainIds.ARB) {
     return new web3.eth.Contract(
       SwapTwoChainData.abi, ARB_SWAP_CROSS_CHAIN
     )
-  } else {
-    return new web3.eth.Contract(
-      SwapTwoChainData.abi, BASE_SWAP_CROSS_CHAIN
-    )
   }
+  return new web3.eth.Contract(
+    SwapTwoChainData.abi, BASE_SWAP_CROSS_CHAIN
+  )
 }
 

@@ -16,6 +16,7 @@ import { getTokenContract, getSwapOneContract } from "../../../services/contract
 import { getAddressOneChainContract } from "../../../utils/blockchain";
 import { requestChangeNetwork } from "../../../services/metamask";
 import {useAccount} from "wagmi";
+import {DECIMALS_FOR_TOKEN} from "../../../constants/contracts";
 
 interface IFormData {
   from: {
@@ -134,7 +135,7 @@ export default function CreateOrder() {
       // Approve token
       await tokenContract.methods.approve(
         SWAP_CONTRACT_ADDRESS,
-        BigInt(10 ** Number(18) * Number(formData.from.amount))
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[formData.from.token.deployedAddress]) * Number(formData.from.amount))
       )
       .send({ from: userState.address });
       toast.update(toastify, { render: "Approve token successfully!", type: "success", isLoading: false, autoClose: 500});
@@ -151,8 +152,8 @@ export default function CreateOrder() {
         orderId,
         formData.from.token.deployedAddress,
         formData.to.token.deployedAddress,
-        BigInt(10 ** Number(18) * Number(formData.from.amount)),
-        BigInt(10 ** Number(18) * Number(formData.to.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[formData.from.token.deployedAddress]) * Number(formData.from.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[formData.to.token.deployedAddress]) * Number(formData.to.amount)),
       ).send({from: userState.address})
       
       // Save order to database

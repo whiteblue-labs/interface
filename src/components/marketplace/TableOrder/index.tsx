@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { useEffect, useState } from "react";
 import { requestChangeNetwork } from "../../../services/metamask";
 import {useAccount} from "wagmi";
+import {DECIMALS_FOR_TOKEN} from "../../../constants/contracts";
 
 const baseTable = [
   { title: "ID", size: 0.1},
@@ -68,7 +69,7 @@ export default function TableOrder(props : any) {
       // Approve token
       await tokenContract.methods.approve(
         SWAP_ADDRESS_CONTRACT,
-        BigInt(10 ** Number(18) * Number(data?.toValue.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data?.toValue.amount)),
       ).send({from: userState.address})
       
       dispatch(updateTask({
@@ -82,7 +83,7 @@ export default function TableOrder(props : any) {
         appState.web3.utils.keccak256(data?._id),
         data?.from.address,
         data?.toValue.token.deployedAddress,
-        BigInt(10 ** Number(18) * Number(data?.toValue.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data?.toValue.amount)),
         appState.web3.utils.keccak256(secretKey),
         false,
       ).send({from: userState.address})
@@ -121,7 +122,7 @@ export default function TableOrder(props : any) {
       
       await tokenContract.methods.approve(
         SWAP_ADDRESS_CONTRACT,
-        BigInt(10 ** Number(18) * Number(data?.toValue.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data?.toValue.amount)),
       ).send({from: userState.address})
 
       task = {...task, status: 2}

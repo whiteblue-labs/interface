@@ -13,6 +13,7 @@ import { getAddressOneChainContract, getAddressTwoChainContract, getBalanceAccou
 import { requestChangeNetwork } from "../../../services/metamask";
 import { fixStringBalance } from "../../../utils/string";
 import {useAccount} from "wagmi";
+import {DECIMALS_FOR_TOKEN} from "../../../constants/contracts";
 
 
 interface IOrderItemProps {
@@ -37,7 +38,7 @@ const Order = ({data, skeleton} : IOrderItemProps) => {
       // Approve token
       await tokenContract.methods.approve(
         SWAP_ADDRESS_CONTRACT,
-        BigInt(10 ** Number(18) * Number(data.toValue.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data.toValue.amount)),
       ).send({from: userState.address})
       
       dispatch(updateTask({
@@ -51,7 +52,7 @@ const Order = ({data, skeleton} : IOrderItemProps) => {
         appState.web3.utils.keccak256(data._id),
         data.from.address,
         data.toValue.token.deployedAddress,
-        BigInt(10 ** Number(18) * Number(data.toValue.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data.toValue.amount)),
         appState.web3.utils.keccak256(secretKey),
         false,
       )
@@ -97,7 +98,7 @@ const Order = ({data, skeleton} : IOrderItemProps) => {
       
       await tokenContract.methods.approve(
         SWAP_ADDRESS_CONTRACT,
-        BigInt(10 ** Number(18) * Number(data.toValue.amount)),
+        BigInt(10 ** Number(DECIMALS_FOR_TOKEN[data.toValue.token.deployedAddress]) * Number(data.toValue.amount)),
       ).send({from: userState.address})
 
       task = {...task, status: 2}

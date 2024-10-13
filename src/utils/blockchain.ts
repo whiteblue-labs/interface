@@ -14,6 +14,7 @@ export const getBalanceToken = async (myWeb3: any, address: string, token: IToke
         {from: address}
     )
     const decimals = await tokenContract.methods.decimals().call({from: address})
+    console.log(balance, decimals)
     balance = fixStringBalance(balance.toString(), Number(decimals))
     return {token, balance}
 }
@@ -45,17 +46,17 @@ export const mappingCurrency = (chainID: number) => {
 // ------------------  -------------------
 export const getAddressOneChainContract = (chainID: number) => {
     if (chainID === ChainIds.ARB) return ARB_SWAP_SAME_CHAIN
-    else if (chainID === ChainIds.BASE) return BASE_SWAP_SAME_CHAIN
+    return BASE_SWAP_SAME_CHAIN
 }
 
 export const getAddressTwoChainContract = (chainID: number) => {
     if (chainID === ChainIds.ARB) return ARB_SWAP_CROSS_CHAIN
-    else if (chainID === 4444) return BASE_SWAP_CROSS_CHAIN
+    return BASE_SWAP_CROSS_CHAIN
 }
 
 export const getLinkExplore = (transactionID: string | undefined, chainID: number) => {
     if (chainID === ChainIds.ARB) return ARB_EXPLORER.concat(`/tx/${transactionID}`)
-    else if (chainID === ChainIds.BASE) return BASE_EXPLORER.concat(`/tx/${transactionID}`)
+    return BASE_EXPLORER.concat(`/tx/${transactionID}`)
 }
 
 

@@ -3,6 +3,7 @@ import { useState} from "react";
 import { useTranslation } from "react-i18next";
 import { FloatButton} from "antd";
 import clsx from "clsx";
+import { base } from 'viem/chains';
 
 import Logo from "../../../assets/svg/big_logo.svg";
 import ConnectWallet from "./helper/ConnectWallet";
@@ -13,6 +14,7 @@ import SidebarMobile from "./helper/SidebarMobile";
 import {useAppSelector} from "../../../state/hooks";
 const Header = () => {
   const currentUrl = useLocation().pathname;
+
   const { t } = useTranslation("common");
   const navigate = useNavigate();
   const appState = useAppSelector((state) => state.appState);
@@ -69,7 +71,6 @@ const Header = () => {
             }}
             className="gotoTop"
           >
-            
             <ConnectWallet />
             {
               (headerShow && currentUrl === "/") &&

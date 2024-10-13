@@ -1,3 +1,5 @@
+import TokenAmount from 'token-amount'
+
 const truncate = (str: string, n: number) => {
   return str && str.length > n ? str.substring(0, n - 1) + "..." : str;
 };
@@ -29,31 +31,8 @@ function shortenAddress(address : string) {
 }
 
 function fixStringBalance(balance:string, decimal: number){
-  if (balance.length < 15) return '0';
-
-  for (let i = balance.length - 1; i >= 0; i--){
-    if (balance[i] === '0' && decimal > 0) {
-      decimal = decimal - 1;
-    } else {
-      balance = balance.slice(0, i+1) 
-      break;
-    };
-  }
-  const idxDot : number = balance.length - decimal;
-
-
-  if(idxDot < 0){
-    return "0." + "0".repeat(-idxDot) + balance.slice(0, 3);
-  }
-  else if (idxDot === balance.length){
-    return balance
-  }
-  else if (idxDot === 0) {
-    return '0.' + balance;
-  }
-  else {
-    return balance.slice(0, idxDot) + "." + balance.slice(idxDot, idxDot + 3);
-  }
+  const amount = new TokenAmount(balance, decimal)
+  return amount.format({ commify: true, digits: 2 })
 }
 
 export { truncate , parsePhone, shortenAddress, fixStringBalance };

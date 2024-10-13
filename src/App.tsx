@@ -35,7 +35,7 @@ function App() {
     const myWeb3 = new Web3(provider);
     dispatch(saveWeb3(myWeb3));
 
-    if (true) {
+    if (address !== storeData.userState.address) {
       const toastify = toast.loading(
         "Connecting to wallet ..., sign message to confirm!",
       );
