@@ -32,7 +32,7 @@ function shortenAddress(address : string) {
 
 function fixStringBalance(balance:string, decimal: number){
   const amount = new TokenAmount(balance, decimal)
-  return amount.format({ commify: true, digits: 2 })
+  return amount.format({ commify: true, digits: 10 })
 }
 
 export { truncate , parsePhone, shortenAddress, fixStringBalance };
