@@ -13,7 +13,7 @@ import i18next from "./translation";
 import {cookieStorage, createConfig, createStorage, http, WagmiProvider} from "wagmi";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ToastContainer} from "react-toastify";
-import {arbitrum, base} from "viem/chains";
+import {arbitrum, base, taiko} from "viem/chains";
 import {getDefaultConfig} from "connectkit";
 import { coinbaseWallet } from "wagmi/connectors";
 import { injected } from "wagmi/connectors";
@@ -24,10 +24,11 @@ const queryClient = new QueryClient();
 
 const config = createConfig(
   getDefaultConfig({
-    chains: [base, arbitrum],
+    chains: [base, arbitrum, taiko],
     transports: {
       [base.id]: http(),
       [arbitrum.id]: http(),
+      [taiko.id]: http(),
     },
     connectors: [
       injected(),

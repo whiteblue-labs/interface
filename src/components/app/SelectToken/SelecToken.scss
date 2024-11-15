@@ -15,6 +15,8 @@
         padding: 20px;
         top: calc((100vh - 600px) / 2 - 50px);
         right: calc((100vw - 600px) / 2);
+        overflow: scroll;
+        max-height: 600px;
 
         .header {
             display: flex;
@@ -77,10 +79,15 @@
         width: 100vw;
         height: 100vh;
         background-color: rgba($color: #000000, $alpha: 0.5);
+        max-height: 50vh;
+        overflow: scroll;
+
         .container {
             background-color: white;
             border-radius: 16px;
             min-height: 600px;
+            max-height: 50vh;
+            overflow: scroll;
             width: 90vw;
         
             position: fixed;

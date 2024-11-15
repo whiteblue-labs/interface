@@ -31,14 +31,24 @@ const MarketPane = (props: IMarketPaneProps) => {
         </Button>
         <div>
           <Button style={{margin: 0, borderRadius: 0, borderTopLeftRadius: 6, borderBottomLeftRadius: 6,
-            backgroundColor: props.dataFilter.network === ChainIds.BASE ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
+            backgroundColor: props.dataFilter.network === ChainIds.TAIKO ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
                   onClick={() => {
-                    if (props.dataFilter.network === ChainIds.BASE)
+                    if (props.dataFilter.network === ChainIds.TAIKO)
                       props.funcNetwork(-1)
-                    else props.funcNetwork(ChainIds.BASE)
+                    else props.funcNetwork(ChainIds.TAIKO)
                   }}>
+            {ChainsInfo[ChainIds.TAIKO].name}
+          </Button>
+          <Button style={{margin: 0, borderRadius: 0,
+            backgroundColor: props.dataFilter.network === ChainIds.BASE ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
+            onClick={() => {
+              if (props.dataFilter.network === ChainIds.BASE)
+                props.funcNetwork(-1)
+              else props.funcNetwork(ChainIds.BASE)
+            }}>
             {ChainsInfo[ChainIds.BASE].name}
           </Button>
+
           <Button style={{margin: 0, borderRadius: 0,  borderTopRightRadius: 6, borderBottomRightRadius: 6,
             backgroundColor: props.dataFilter.network === ChainIds.ARB ? 'rgba(21, 191, 253, 0.5)' : 'white' }}
             onClick={() => {

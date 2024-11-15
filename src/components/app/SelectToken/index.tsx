@@ -28,7 +28,6 @@ const SelectToken = (props: ISelectTokenProps) => {
   const userState = useAppSelector((state) => state.userState);
   const {connector, chainId} = useAccount();
 
-  console.log("chainId", chainId)
   return (
     <div
       className="app-select_token"

@@ -91,7 +91,7 @@
     "typescript": "5.4.5",
     "uuid": "^9.0.0",
     "viem": "2.x",
-    "wagmi": "^2.12.17",
+    "wagmi": "2.12.17",
     "web-vitals": "^2.1.0",
     "web3": "1.8.0",
     "webpack": "^5.72.1",
@@ -126,5 +126,6 @@
   "devDependencies": {
     "@types/react-cookies": "^0.1.0",
     "webpack-cli": "^4.9.2"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
